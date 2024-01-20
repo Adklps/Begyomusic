@@ -17,6 +17,7 @@ const client = new Client({
     GatewayIntentBits.GuildMembers, // for guild members related things
     GatewayIntentBits.GuildIntegrations, // for discord Integrations
     GatewayIntentBits.GuildVoiceStates, // for voice related things
+    GatewayIntentBits.GuildMessages,
   ],
 });
 
@@ -29,7 +30,6 @@ client.player = new DisTube(client, {
   leaveOnEmpty: config.opt.voiceConfig.leaveOnEmpty.status,
   emitNewSongOnly: true,
   emitAddSongWhenCreatingQueue: false,
-  emitAddListWhenCreatingQueue: false,
   plugins: [
     new SpotifyPlugin(),
     new SoundCloudPlugin(),
@@ -52,6 +52,8 @@ fs.readdir("./events", (_err, files) => {
     delete require.cache[require.resolve(`./events/${file}`)];
   });
 });
+
+
 
 fs.readdir("./events/player", (_err, files) => {
   files.forEach((file) => {
